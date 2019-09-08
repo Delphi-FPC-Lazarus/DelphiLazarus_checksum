@@ -40,13 +40,13 @@ type
     destructor Destroy; override;
 
     { Prüfsummengenerierung über eine Datei }
-    function GetCRC32(FileName: string; var filecrc: longword): boolean;
+    function GetCRC32(const FileName: string; var filecrc: longword): boolean;
 
     { Prüfsummengenerierung über eine Datei
       startoffset ist die Anzahl der am Start wegzulassenden Daten  (0=kein Offset, 10=die ersten 10 Bytes weglassen, usw.)
       stopoffset ist die Anzahl der am Ende wegzulassenden Daten    (0=bis Ende, 10=bis Dateigröße-10 Bytes)
     }
-    function GetCRC32_pos2pos(FileName: string; startoffset, endoffset: int64;
+    function GetCRC32_pos2pos(const FileName: string; startoffset, endoffset: int64;
       var filecrc: longword): boolean;
 
     { falls Prüfsummengenerierung im Thread ausgeführt wird ist diese hiermit abbrechbar }
@@ -165,7 +165,7 @@ end;
 
 { -------------------------- CRC Berechnung -------------------------- }
 
-function TCRC32.GetCRC32(FileName: string; var filecrc: longword): boolean;
+function TCRC32.GetCRC32(const FileName: string; var filecrc: longword): boolean;
 
   function RecountCRC(b: Byte; CrcOld: longword): longword;
   begin
@@ -225,7 +225,7 @@ end;
 
 { -------------------------------------------------------------------- }
 
-function TCRC32.GetCRC32_pos2pos(FileName: string;
+function TCRC32.GetCRC32_pos2pos(const FileName: string;
   startoffset, endoffset: int64; var filecrc: longword): boolean;
 
   function RecountCRC(b: Byte; CrcOld: longword): longword;
